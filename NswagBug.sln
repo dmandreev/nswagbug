@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1401
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NswagBug", "NswagBug\NswagBug.csproj", "{889F7819-55A4-4B68-AFA3-B4513FBF1020}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSite", "WebSite\WebSite.csproj", "{A498C414-34C9-4A9F-84B6-C5FC0572C70C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{889F7819-55A4-4B68-AFA3-B4513FBF1020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{889F7819-55A4-4B68-AFA3-B4513FBF1020}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{889F7819-55A4-4B68-AFA3-B4513FBF1020}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{889F7819-55A4-4B68-AFA3-B4513FBF1020}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A498C414-34C9-4A9F-84B6-C5FC0572C70C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A498C414-34C9-4A9F-84B6-C5FC0572C70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A498C414-34C9-4A9F-84B6-C5FC0572C70C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A498C414-34C9-4A9F-84B6-C5FC0572C70C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23C9A71C-0052-46E7-9919-CBBA6AFF161F}
+	EndGlobalSection
+EndGlobal
