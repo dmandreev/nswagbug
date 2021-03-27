@@ -10,13 +10,62 @@ namespace NswagBug
     class Program
     {
 
+
+        static void Main(string[] args)
+        {
+            var _csgensettings = new CSharpClientGeneratorSettings
+            {
+                CSharpGeneratorSettings =
+                    {
+                        Namespace = "Somenamespace",
+                        JsonLibrary= CSharpJsonLibrary.NewtonsoftJson
+                    },
+                ExceptionClass = "UnexpectedApiException",
+                GenerateClientInterfaces = true,
+                GenerateDtoTypes = true,
+                GenerateClientClasses = true,
+            };
+
+            
+
+            var settings = new WebApiOpenApiDocumentGeneratorSettings()
+            {
+                Title = "Title",
+                IsAspNetCore = false,
+                Description = "C# client",
+                SchemaType = NJsonSchema.SchemaType.Swagger2,
+                Version = "1.0.0.0",
+
+            };
+
+            var generator = new WebApiOpenApiDocumentGenerator(settings);
+
+            NSwag.OpenApiDocument document = generator.GenerateForControllersAsync(
+                new List<System.Type> { typeof(WebSite.Controllers.ValuesController) }
+                ).Result;
+
+            
+
+            var codeGen = new CSharpClientGenerator(document,_csgensettings);
+
+
+            //bugged code produced
+            //with
+            // var settings = w Newtonsoft.Json.JsonSerializerSettings();
+            Console.WriteLine(codeGen.GenerateFile());
+
+            //in
+            string buggedString = JsonSerializerParameterCodeLogic(_csgensettings);
+        }
+
+
         static string JsonSerializerParameterCodeLogic(CSharpClientGeneratorSettings _settings)
         {
             bool RequiresJsonExceptionConverter = true;
 
-            var parameterCode = 
+            var parameterCode =
                 CSharpJsonSerializerGenerator.GenerateJsonSerializerParameterCode(
-                    _settings.CSharpGeneratorSettings, RequiresJsonExceptionConverter ? 
+                    _settings.CSharpGeneratorSettings, RequiresJsonExceptionConverter ?
                     new[] { "JsonExceptionConverter" } : null);
 
 
@@ -40,49 +89,5 @@ namespace NswagBug
             return parameterCode;
         }
 
-        static void Main(string[] args)
-        {
-            var st = new CSharpClientGeneratorSettings
-            {
-                CSharpGeneratorSettings =
-                    {
-                        Namespace = "Somenamespace",
-                        JsonLibrary= CSharpJsonLibrary.NewtonsoftJson
-                    },
-                ExceptionClass = "UnexpectedApiException",
-                GenerateClientInterfaces = true,
-                GenerateDtoTypes = true,
-                GenerateClientClasses = true,
-            };
-
-            
-            string buggedString = JsonSerializerParameterCodeLogic(st);
-
-            var settings = new WebApiOpenApiDocumentGeneratorSettings()
-            {
-                Title = "Title",
-                IsAspNetCore = false,
-                Description = "C# client",
-                SchemaType = NJsonSchema.SchemaType.Swagger2,
-                Version = "1.0.0.0",
-
-            };
-
-            var generator = new WebApiOpenApiDocumentGenerator(settings);
-
-            NSwag.OpenApiDocument document = generator.GenerateForControllersAsync(
-                new List<System.Type> { typeof(WebSite.Controllers.ValuesController) }
-                ).Result;
-
-            
-
-            var codeGen = new CSharpClientGenerator(document,st);
-
-
-            //bugged code produced
-            //with
-            // var settings = w Newtonsoft.Json.JsonSerializerSettings();
-            Console.WriteLine(codeGen.GenerateFile());
-        }
     }
 }
